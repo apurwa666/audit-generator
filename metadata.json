@@ -1,0 +1,7 @@
+{
+  "name": "Nepal Audit Report Generator",
+  "description": "Comprehensive audit report preparation software for Nepalese auditing firms with automated financial calculations, bilingual English & Nepali labels, senior-friendly UI, and instant PDF/Excel export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

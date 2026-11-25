@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Outfit', 'Mukta', sans-serif;
+  }
+}
+
+/* Print specific optimizations for official Nepalese Audit Reports */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 12mm 15mm 12mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .page-break {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Table styling for crisp print */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  th, td {
+    border: 1px solid #333333 !important;
+    padding: 4px 6px !important;
+  }
+
+  /* Hide shadows, glows, and interactive indicators */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Screen UI refinement: calmer spacing and clearer visual hierarchy.
+   These rules intentionally affect presentation only; form fields, data flow,
+   calculations, and report output are unchanged.
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  --audit-ink: #172b3a;
+  --audit-muted: #5e7180;
+  --audit-border: #dce5eb;
+  --audit-surface: #ffffff;
+  --audit-page: #f3f6f8;
+  --audit-green: #087f68;
+}
+
+@media screen {
+  body {
+    background: var(--audit-page);
+    color: var(--audit-ink);
+    line-height: 1.55;
+  }
+
+  .audit-app-shell {
+    background: var(--audit-page) !important;
+  }
+
+  .audit-workspace {
+    padding-top: clamp(1.25rem, 2.4vw, 2.25rem);
+    padding-bottom: clamp(1.75rem, 3vw, 3rem);
+  }
+
+  /* Give each section more breathing room without changing its contents. */
+  .audit-workspace .space-y-8 > :not([hidden]) ~ :not([hidden]),
+  .audit-workspace .space-y-10 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 2rem;
+  }
+
+  .audit-workspace .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 1.5rem;
+  }
+
+  .audit-workspace .bg-white.rounded-xl,
+  .audit-workspace .bg-white.rounded-2xl,
+  .audit-workspace .bg-white.rounded-lg {
+    border-color: var(--audit-border);
+    box-shadow: 0 3px 12px rgba(27, 52, 69, 0.045);
+  }
+
+  .audit-workspace .bg-white.rounded-xl,
+  .audit-workspace .bg-white.rounded-2xl {
+    overflow-wrap: anywhere;
+  }
+
+  /* More legible headings, especially on long entry screens. */
+  .audit-workspace h2 {
+    line-height: 1.35;
+    letter-spacing: -0.018em;
+  }
+
+  .audit-workspace h3 {
+    line-height: 1.4;
+  }
+
+  .audit-workspace label {
+    display: block;
+    line-height: 1.45;
+    margin-bottom: 0.45rem;
+    color: #334b5b;
+  }
+
+  .audit-workspace input:not([type="checkbox"]):not([type="radio"]),
+  .audit-workspace select,
+  .audit-workspace textarea {
+    max-width: 100%;
+    min-height: 2.75rem;
+    border-color: #cbd8e0;
+    border-radius: 0.65rem;
+    background-color: #fbfcfd;
+    box-shadow: inset 0 1px 1px rgba(20, 40, 55, 0.025);
+    transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+  }
+
+  .audit-workspace textarea {
+    min-height: 6rem;
+  }
+
+  .audit-workspace input:focus,
+  .audit-workspace select:focus,
+  .audit-workspace textarea:focus {
+    outline: none;
+    border-color: #0f9b80;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(15, 155, 128, 0.13);
+  }
+
+  .audit-workspace input::placeholder,
+  .audit-workspace textarea::placeholder {
+    color: #92a1ab;
+  }
+
+  /* Separate form groups so they read as sections, not one long wall. */
+  .audit-workspace .grid {
+    row-gap: 1.25rem;
+  }
+
+  .audit-workspace .border-b.border-slate-200,
+  .audit-workspace .border-b.border-slate-300 {
+    border-color: #e4ebef;
+  }
+
+  .audit-workspace table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .audit-workspace table th {
+    background: #f1f5f7;
+    color: #30495a;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .audit-workspace table th,
+  .audit-workspace table td {
+    padding: 0.7rem 0.8rem;
+    vertical-align: middle;
+  }
+
+  .audit-workspace table tbody tr:nth-child(even) {
+    background-color: #fafcfd;
+  }
+
+  .audit-workspace table input,
+  .audit-workspace table select {
+    min-width: 5.5rem;
+  }
+
+  .audit-workspace button {
+    line-height: 1.4;
+  }
+
+  .audit-workspace button:focus-visible,
+  .audit-step-navigation button:focus-visible {
+    outline: 3px solid rgba(15, 155, 128, 0.35);
+    outline-offset: 2px;
+  }
+
+  /* The nine workflow steps now wrap into readable cards instead of one
+     cramped, extra-wide strip. */
+  .audit-step-navigation {
+    border-bottom-color: var(--audit-border);
+    box-shadow: 0 2px 8px rgba(27, 52, 69, 0.035);
+  }
+
+  .audit-step-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .audit-step-button {
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.8rem;
+    text-align: left;
+  }
+
+  .audit-step-button > div:last-child {
+    min-width: 0;
+  }
+
+  .audit-step-button > div:last-child span,
+  .audit-step-button > div:last-child div {
+    overflow-wrap: anywhere;
+  }
+
+  /* Less visual noise in the sticky app header while keeping all controls. */
+  .audit-app-shell header {
+    box-shadow: 0 2px 10px rgba(27, 52, 69, 0.04);
+  }
+
+  @media (max-width: 900px) {
+    .audit-step-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .audit-step-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .audit-workspace {
+      padding-left: 0.85rem;
+      padding-right: 0.85rem;
+    }
+
+    .audit-workspace .bg-white.rounded-xl,
+    .audit-workspace .bg-white.rounded-2xl {
+      border-radius: 0.9rem;
+    }
+
+    .audit-workspace table th,
+    .audit-workspace table td {
+      padding: 0.55rem 0.6rem;
+    }
+  }
+}
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+}

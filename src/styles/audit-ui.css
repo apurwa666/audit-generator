@@ -1,0 +1,233 @@
+/*
+ * Nepal Audit Report Generator – UI refinement layer
+ * Import this file AFTER index.css in src/main.tsx.
+ * Presentation only: no data, fields, calculations, or event handlers changed.
+ */
+
+:root {
+  --audit-brand: #176b57;
+  --audit-brand-dark: #125443;
+  --audit-brand-soft: #eaf4f0;
+  --audit-ink: #1d2b35;
+  --audit-muted: #657581;
+  --audit-line: #dfe7e9;
+  --audit-canvas: #f4f7f6;
+  --audit-card: #ffffff;
+  --audit-radius: 14px;
+  --audit-shadow: 0 5px 20px rgba(24, 48, 42, 0.055);
+}
+
+@media screen {
+  html { background: var(--audit-canvas); }
+  body {
+    background: var(--audit-canvas);
+    color: var(--audit-ink);
+    font-family: 'Outfit', 'Mukta', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  .audit-app-shell {
+    background: var(--audit-canvas) !important;
+    color: var(--audit-ink);
+  }
+
+  /* Header: calmer hierarchy, without hiding or removing any controls. */
+  .audit-app-shell > header {
+    position: relative;
+    background: #fff;
+    border-bottom: 1px solid var(--audit-line);
+    box-shadow: 0 3px 14px rgba(22, 48, 42, .045);
+  }
+  .audit-app-shell > header > div:first-child {
+    max-width: 1500px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    gap: 18px;
+  }
+  .audit-app-shell > header h1 {
+    color: #172d28;
+    letter-spacing: -.035em;
+    line-height: 1.2;
+  }
+  .audit-app-shell > header > div:nth-child(2) {
+    background: #203a34;
+    min-height: 48px;
+  }
+
+  /* Client / fiscal-year ribbon below the header. */
+  .audit-app-shell > div:nth-of-type(1) {
+    border-color: #29473f;
+  }
+
+  /* Workflow navigation: consistent cards with strong active state. */
+  .audit-step-navigation {
+    background: #fff;
+    border-bottom: 1px solid var(--audit-line);
+    box-shadow: 0 4px 14px rgba(25, 49, 43, .035);
+  }
+  .audit-step-grid {
+    max-width: 1500px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .audit-step-button {
+    min-height: 68px;
+    padding: 11px 14px;
+    border: 1px solid #dce6e2;
+    border-radius: 12px;
+    background: #fbfdfc;
+    box-shadow: none;
+    transition: background .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+  }
+  .audit-step-button:hover {
+    border-color: #9dbdb1;
+    background: #f4faf7;
+    transform: translateY(-1px);
+  }
+  .audit-step-button:focus-visible {
+    outline: 3px solid rgba(23, 107, 87, .22);
+    outline-offset: 2px;
+  }
+  .audit-step-button.bg-emerald-700 {
+    background: var(--audit-brand);
+    border-color: var(--audit-brand);
+    box-shadow: 0 4px 12px rgba(23, 107, 87, .17);
+  }
+  .audit-step-button.bg-amber-500 {
+    background: #f3c969;
+    border-color: #e6b94e;
+    color: #392b0d;
+  }
+
+  /* Main workspace and the existing white content panels. */
+  .audit-workspace {
+    max-width: 1500px;
+    padding-top: 30px;
+    padding-bottom: 42px;
+  }
+  .audit-workspace .bg-white.rounded-xl,
+  .audit-workspace .bg-white.rounded-2xl,
+  .audit-workspace .bg-white.rounded-lg {
+    border: 1px solid var(--audit-line);
+    border-radius: var(--audit-radius);
+    box-shadow: var(--audit-shadow);
+  }
+  .audit-workspace h2 {
+    color: #203b33;
+    letter-spacing: -.025em;
+    line-height: 1.3;
+  }
+  .audit-workspace h3 {
+    color: #29483e;
+    line-height: 1.4;
+  }
+  .audit-workspace p,
+  .audit-workspace .text-slate-500,
+  .audit-workspace .text-slate-600 {
+    line-height: 1.55;
+  }
+
+  /* Inputs: readable and comfortable for older practitioners. */
+  .audit-workspace input:not([type='checkbox']):not([type='radio']),
+  .audit-workspace select,
+  .audit-workspace textarea {
+    border: 1px solid #cbd8d3;
+    border-radius: 8px;
+    background: #fff;
+    color: #20332d;
+    min-height: 43px;
+    padding: 9px 11px;
+    box-shadow: inset 0 1px 2px rgba(15, 35, 29, .025);
+  }
+  .audit-workspace textarea { min-height: 96px; }
+  .audit-workspace input:focus,
+  .audit-workspace select:focus,
+  .audit-workspace textarea:focus {
+    outline: none;
+    border-color: #31866f;
+    box-shadow: 0 0 0 3px rgba(49, 134, 111, .14);
+  }
+  .audit-workspace label {
+    color: #344b43;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+
+  /* Tables: clear row separation, but keep the daybook dense as a ledger. */
+  .audit-workspace table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+  }
+  .audit-workspace table th {
+    background: #edf3f0;
+    color: #29483e;
+    font-weight: 700;
+    border-bottom: 1px solid #d6e2dc;
+  }
+  .audit-workspace table th,
+  .audit-workspace table td {
+    padding: 10px 12px;
+    vertical-align: middle;
+  }
+  .audit-workspace table tbody tr:nth-child(even) { background: #fafcfb; }
+  .audit-workspace table tbody tr:hover { background: #f3f8f5; }
+
+  /* Daybook exception: compact ledger dimensions must not inherit form sizing. */
+  .audit-workspace .daybook-ui table th,
+  .audit-workspace .daybook-ui table td {
+    padding: 6px 7px;
+    line-height: 1.35;
+  }
+  .audit-workspace .daybook-ui table input:not([type='checkbox']):not([type='radio']),
+  .audit-workspace .daybook-ui table select,
+  .audit-workspace .daybook-ui table textarea {
+    min-height: 30px;
+    height: auto;
+    min-width: 0;
+    padding: 4px 6px;
+    border-radius: 5px;
+    font-size: .82rem;
+  }
+  .audit-workspace .daybook-ui table td:nth-child(5) { min-width: 210px; width: 210px; }
+  .audit-workspace .daybook-ui table td:nth-child(5) .flex { min-width: 0; flex-wrap: wrap; gap: 5px; }
+  .audit-workspace .daybook-ui table td:nth-child(5) select { flex: 1 1 100px; max-width: 100%; }
+  .audit-workspace .daybook-ui table td:nth-child(5) button { white-space: normal; }
+
+  /* Buttons: consistent shape and visible focus, without changing actions. */
+  .audit-workspace button,
+  .audit-app-shell button { line-height: 1.4; }
+  .audit-workspace button:focus-visible,
+  .audit-app-shell button:focus-visible {
+    outline: 3px solid rgba(23, 107, 87, .24);
+    outline-offset: 2px;
+  }
+
+  /* Bottom navigation controls. */
+  .audit-workspace > .mt-8 {
+    padding-top: 22px;
+    border-color: #d8e3de;
+  }
+}
+
+@media (max-width: 1050px) {
+  .audit-step-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .audit-step-grid { grid-template-columns: 1fr; padding: 12px 14px; }
+  .audit-step-button { min-height: 60px; }
+  .audit-workspace { padding: 20px 14px 30px; }
+  .audit-workspace table th,
+  .audit-workspace table td { padding: 8px 9px; }
+  .audit-app-shell > header > div:first-child { align-items: flex-start; }
+}
+
+@media print {
+  .audit-step-navigation { display: none !important; }
+  .audit-workspace { max-width: none !important; padding: 0 !important; }
+}
